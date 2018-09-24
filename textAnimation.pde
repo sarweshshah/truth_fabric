@@ -22,7 +22,7 @@ class TextAnim {
   void display() {
     int now = millis();
     textOpacity = (int) map(now, startTime, endTime, 0, 255);
-    textSize = map(now, startTime, endTime, 10.0, 20.0);
+    textSize = map(now, startTime, endTime, 20.0, 40.0);
     fill(255, 255, 255, textOpacity);
     textAlign(CENTER);
     textSize(textSize);

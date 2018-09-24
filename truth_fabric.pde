@@ -10,7 +10,8 @@ PImage img;
 String[] lines;
 
 void settings() {
-  size(512, 424);
+  //size(512, 424);
+  fullScreen();
 }
 
 void setup() {

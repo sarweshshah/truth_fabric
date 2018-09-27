@@ -1,9 +1,11 @@
+import codeanticode.syphon.*; //<>//
 import java.util.List;
 import org.openkinect.processing.*;
 
 //Kinect Library object
 Kinect2 kinect2;
 List<TextAnim> anims;
+SyphonServer server;
 
 float minThresh = 900;
 float maxThresh = 1000;
@@ -22,6 +24,8 @@ void setup() {
   img = createImage(kinect2.depthWidth, kinect2.depthHeight, RGB);
   lines = loadStrings("list.txt");
   anims = new ArrayList<TextAnim>();
+
+  server = new SyphonServer(this, "truth_fabric");
 
   smooth();
   textMode(SHAPE);
@@ -76,6 +80,8 @@ void draw() {
       anims.remove(i);
     }
   }
+
+  server.sendScreen();
 }
 
 void updateWords(int x, int y) {

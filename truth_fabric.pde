@@ -64,13 +64,17 @@ void draw() {
   img.updatePixels();
   image(img, 0, 0);
 
-  float avgX = sumX / totalPixels;
-  float avgY = sumY / totalPixels;
-  fill(150, 0, 255);
-  if (totalPixels >= 200) {
-    ellipse(avgX, avgY, 15, 15);
-    //updateWords((int) mouseX, mouseY);
-    updateWords((int) avgX, (int) avgY);
+  if (totalPixels > 0) {
+    float avgX = sumX / totalPixels;
+    float avgY = sumY / totalPixels;
+
+    fill(150, 0, 255);
+    //println(totalPixels);
+    if (totalPixels >= 200) {
+      ellipse(avgX, avgY, 15, 15);
+      //updateWords((int) mouseX, mouseY);
+      updateWords((int) avgX, (int) avgY);
+    }
   }
   
   pushMatrix();

@@ -35,7 +35,7 @@ void setup() {
 void draw() {
   background(0);
 
-  img.loadPixels();  
+  img.loadPixels();
 
   // Get the raw depth as array of integers
   int[] depth = kinect2.getRawDepth();
@@ -49,7 +49,7 @@ void draw() {
       int offset = x + y * kinect2.depthWidth;
       int d = depth[offset];
 
-      if (d > minThresh && d < maxThresh && x > 60 && x < 1300) {
+      if (d > minThresh && d < maxThresh) {
         img.pixels[offset] = color(255, 0, 150);
 
         sumX += x;
@@ -72,6 +72,13 @@ void draw() {
     //updateWords((int) mouseX, mouseY);
     updateWords((int) avgX, (int) avgY);
   }
+  
+  pushMatrix();
+  fill(255, 229, 31);
+  textAlign(CENTER);
+  textSize(20); 
+  text("Truth is...", width/2, 40);
+  popMatrix();
 
   for (int i = 0; i < anims.size(); i++) {
     if (anims.get(i).endTime > millis()) {

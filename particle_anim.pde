@@ -42,8 +42,8 @@ class ParticleAnim {
     }
   }
 
-  void nextWord(int newPosX, int newPosY) {
-    if (dist(posX, posY, newPosX, newPosY) > 10) {
+  void nextWord(float newPosX, float newPosY) {
+    if (dist(posX, posY, newPosX, newPosY) > 100) {
       posX = newPosX;
       posY = newPosY;
       
@@ -54,7 +54,7 @@ class ParticleAnim {
       pg.textAlign(CENTER);
       PFont font = createFont(fontName, textSize);
       pg.textFont(font);
-      pg.text(words.get(wordIndex), posX, posY);
+      pg.text("Truth is " + words.get(wordIndex), posX, posY);
       pg.endDraw();
       pg.loadPixels();
 

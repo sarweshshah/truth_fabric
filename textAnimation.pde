@@ -36,7 +36,7 @@ class TextAnim {
   }
 
   boolean inVicinity(int x, int y) {
-    if ((posX-x) * (posX-x) + (posY-y) * (posY-y) < vicinityRadius * vicinityRadius) {
+    if (dist(posX, posY, x, y) < vicinityRadius) {
       return true;
     }
     return false;

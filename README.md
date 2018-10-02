@@ -14,3 +14,9 @@ Added static text to the screen. The program broadcasts its screen via a Syphon 
 Kinect functionality added as well.
 
 ![](https://github.com/sarweshshah/truth_fabric/blob/master/results/result2.gif)
+
+### Iteration 3:
+Changed to a different style of animation and interaction. The particle effect was incorporated with Kinect depth sensor.
+Code not optimised based on memory usage.
+
+![](https://github.com/sarweshshah/truth_fabric/blob/master/results/result3.gif)

@@ -14,6 +14,7 @@ String[] lines;
 
 void settings() {
   size(1440, 900, P3D);
+  // fullScreen(P3D, 2);
 }
 
 void setup() {
@@ -56,7 +57,7 @@ void draw() {
         sumY += y;
         totalPixels++;
       } else {
-        img.pixels[offset] = color(0);
+        img.pixels[offset] = color(51);
       }
     }
   }
@@ -71,17 +72,22 @@ void draw() {
     fill(150, 0, 255);
     //println(totalPixels);
     if (totalPixels >= 200) {
+      float mappedX = map(avgX, 0, 512, width/2 - 1024, width/2 + 1024);
+      float mappedY = map(avgY, 0, 424, height/2 - 848, height/2 + 848);
+
       ellipse(avgX, avgY, 15, 15);
+      ellipse(mappedX, mappedY, 15, 15);
+      
       //updateWords((int) mouseX, mouseY);
-      updateWords((int) avgX, (int) avgY);
+      updateWords((int) mappedX, (int) mappedY);
     }
   }
-  
+
   pushMatrix();
   fill(255, 229, 31);
   textAlign(CENTER);
-  textSize(20); 
-  text("Truth is...", width/2, 40);
+  textSize(40); 
+  text("Truth is...", width/2, 60);
   popMatrix();
 
   for (int i = 0; i < anims.size(); i++) {

@@ -2,7 +2,7 @@ class TextAnim {
   String textString;
   float textSize;
   int textOpacity;
-  int vicinityRadius = 80;
+  int vicinityRadius = 150;
 
   int duration, startTime, endTime; 
   int posX, posY;

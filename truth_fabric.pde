@@ -6,14 +6,14 @@ import org.openkinect.processing.*;
 Kinect2 kinect2;
 SyphonServer server;
 ParticleAnim panim;
+TypeFace truthText;
 
-float minThresh = 900;
-float maxThresh = 1000;
+float minThresh = 1900;
+float maxThresh = 1940;
 PImage img;
-String[] lines;
 
 void settings() {
-  fullScreen(P3D);
+  size(1024, 768, P3D);
 }
 
 void setup() {
@@ -22,17 +22,17 @@ void setup() {
   kinect2.initDevice();
 
   img = createImage(kinect2.depthWidth, kinect2.depthHeight, RGB);
-  lines = loadStrings("list.txt");
+  
   panim = new ParticleAnim();
-  panim.nextWord(width/2, height/2);
+  truthText = new TypeFace("TRUTH is...", width/2, 40);
 
   server = new SyphonServer(this, "truth_fabric");
 }
 
 
 void draw() {
-
   panim.display();
+  truthText.display();
 
   img.loadPixels();
 
@@ -44,11 +44,11 @@ void draw() {
   float totalPixels = 0;
 
   for (int x = 0; x < kinect2.depthWidth; x++) {
-    for (int y = 0; y < kinect2.depthHeight; y++) {
+    for (int y = 0; y < kinect2.depthHeight; y++) {      
       int offset = x + y * kinect2.depthWidth;
       int d = depth[offset];
 
-      if (d > minThresh && d < maxThresh) {
+      if (d > minThresh && d < maxThresh && y < 304) {
         img.pixels[offset] = color(255, 0, 150);
         sumX += x;
         sumY += y;
@@ -69,10 +69,11 @@ void draw() {
 
   fill(150, 0, 255);
 
-  if (totalPixels >= 200) {
-    mappedX = map(avgX, 0, 512, width/2 - 1024, width/2 + 1024);
-    mappedY = map(avgY, 0, 424, height/2 - 848, height/2 + 848);
+  if (totalPixels >= 400) {
+    mappedX = map(avgX, 0, 512, width/2 - 512, width/2 + 512);
+    mappedY = map(avgY, 0, 304, height/2 - 384, height/2 + 384);
 
+    if (avgY > 204) avgY += 10;
     ellipse(avgX, avgY, 15, 15);
     ellipse(mappedX, mappedY, 15, 15);
 
@@ -81,3 +82,7 @@ void draw() {
 
   server.sendScreen();
 }
+
+void mouseClicked() {
+  panim.nextWord(mouseX, mouseY);
+} 

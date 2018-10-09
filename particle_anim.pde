@@ -1,14 +1,14 @@
 // Makes all particles draw the next word //<>//
 class ParticleAnim {
   ArrayList<Particle> particles = new ArrayList<Particle>();
-  int pixelSteps = 5; // Amount of pixels to skip
+  int pixelSteps = 3; // Amount of pixels to skip
 
   ArrayList<String> words = new ArrayList<String>();
   int wordIndex = 0;
   color bgColor = color(0, 40);
   String fontName = "Arial Bold";
   int textSize = 50;
-  
+
   float posX, posY;
 
   ParticleAnim() {
@@ -19,6 +19,13 @@ class ParticleAnim {
     
     posX = width/2;
     posY = height/2;
+  }
+
+  ParticleAnim(String word) {
+    words.add(word);
+
+    posX = width/2;
+    posY = 50;
   }
 
   void display() {
@@ -46,7 +53,7 @@ class ParticleAnim {
     if (dist(posX, posY, newPosX, newPosY) > 100) {
       posX = newPosX;
       posY = newPosY;
-      
+
       // Draw word in memory
       PGraphics pg = createGraphics(width, height);
       pg.beginDraw();
@@ -54,7 +61,7 @@ class ParticleAnim {
       pg.textAlign(CENTER);
       PFont font = createFont(fontName, textSize);
       pg.textFont(font);
-      pg.text("Truth is " + words.get(wordIndex), posX, posY);
+      pg.text(words.get(wordIndex), posX, posY);
       pg.endDraw();
       pg.loadPixels();
 
@@ -103,9 +110,9 @@ class ParticleAnim {
             newParticle.pos.x = randomPos.x;
             newParticle.pos.y = randomPos.y;
 
-            newParticle.maxSpeed = random(2.0, 5.0);
+            newParticle.maxSpeed = random(4.0, 7.0);
             newParticle.maxForce = newParticle.maxSpeed*0.025;
-            newParticle.particleSize = random(3, 6);
+            newParticle.particleSize = random(3, 4);
             newParticle.colorBlendRate = random(0.0025, 0.03);
 
             particles.add(newParticle);
